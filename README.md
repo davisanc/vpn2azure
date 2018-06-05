@@ -20,7 +20,7 @@ First thing to bear in mind is that you cannot have overlapping IP address betwe
 
 We will start creating a Virtual Network (again make sure the address space you enter doesn't overlap with the space on your local network), followed by the gateway subnet (I decided to use /24 to keep the same subnetting scheme but the recommendation from Microsoft is to use a /27 or /28 for the gateway subnet).
 
-![image of vnet](/images/create_vnet.png)
+![image of vnet](/images/create_vnet)
 
 Next, we will create the Virtual Network Gateway
 
