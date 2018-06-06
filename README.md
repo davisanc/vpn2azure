@@ -87,9 +87,9 @@ Finally, you will be able to see the BGP session coming up after a few minutes
 
 ![image_of_bgp-status1](/images/bgp-status1.png)
 
-![image_of_bgp-status2](/images/bgp-status2.png
+![image_of_bgp-status2](/images/bgp-status2.png)
 
 To test this, you can simply ping from a computer on the LAN side of the pfSense (192.168.1.0/24) to a VM in Azure on the VNET address space (10.11.0.0/16), and that should work! :)
 
-![image_of_ping](/images/ping.png
+![image_of_ping](/images/ping.png)
 
