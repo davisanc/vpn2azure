@@ -11,7 +11,7 @@ First thing to bear in mind is that you cannot have overlapping IP address betwe
 | Azure VNET Address Space  | 10.11.0.0/16  |
 | Azure VNET VM Subnet  | 10.11.0.0/24  |
 | Azure VNET Gateway Subnet   | 10.11.3.0/24  |
-| Azure VPN Gateway Public IP  |   |
+| Azure VPN Gateway Public IP  |  23.97.137.42 |
 | Azure VPN Type  | Route-Based |
 | Azure VPN BGP ASN  | 65515 |
 | Azure Gateway Type  | VPN |
@@ -44,3 +44,47 @@ Now we are going to create the Local Network Gateway. Azure refers to the VPN de
 Once the local gateway is created we will define a connection to our home VPN Gateway. We will use a private shared key to enable the IPSEC VPN to come up. Remember to mark BGP to 'enabled' on your Connection. This is how it looks like when the connection is up and running (assuming at this poit have done the similar on the other end)
 
 ![image_of_connection](/images/connection.PNG)
+
+Now, moving to the other end we will use the Web UI on the pfSense firewall to work on the Rules and VPN settings
+To configure a new tunnel, a new Phase 1 IPSEC VPN must be created. Remote Gateway will be the public IP address assigned to my Virtual Network Gateway in Azure. Leave 'auto' as IKE key exchange version, selecting WAN as the interface to run the VPN. For the authentication part, use the Pre-Shared Key you have defined. Use the encryption algorithm you need, in my case AES (256 bits), DH group and Hashing algorithm
+
+![image_of_phase1](/images/phase1.PNG)
+
+We will then move to Phase 2. This phase is what builds the actual tunnel, sets the protocol to use, and sets the length of time to keep the tunnel up when there is no traffic. For remote network, use the VNET address space. Local subnet will the address space on the LAN side of the pFsense
+
+![image_of_phase2](/images/phase2.PNG)
+
+Apply changes and go to IPSEC Status 
+
+![image_of_ipsec-status](/images/ipsec-status.PNG)
+
+You will need to create a rule to permit IPSEC traffic coming through your WAN interface
+
+I have also open TCP port 179 on a rule on the IPSEC interface to permit incoming BGP connections from Azure
+
+![image_of_ipsec-rule](/images/ipsec-rule.PNG)
+
+Now, in order to use BGP on pfSense you will need to install OpenGPD through the Packet Manager
+We will use BGP peer groups to define the BGP ASN of the Azure peer
+
+![image_of_bgp-group](/images/bgp-group.PNG)
+
+With BGP, you only need to declare a minimum prefix to a specific BGP peer over the IPsec S2S VPN tunnel. It can be as small as a host prefix (/32) of the BGP peer IP address of your on-premises VPN device. The point of using BGP over VPN is that you can control dynamically which on-premises network prefixes you want to advertise to Azure to allow your Azure Virtual Network to access
+
+My BGP settings are the following:
+
+![image_of_bgp-settings](/images/bgp-settings.PNG)
+
+BGP neighbor will be the IP address of the Virtual Gateway on Azure, in my case with IP address 10.11.3.254
+
+![image_of_bgp-neighbor](/images/bgp-neighbor.PNG)
+
+You can also visualize the whole BGP raw config in pfSense
+
+![image_of_bgp-rawconfig](/images/bgp-rawconfig.PNG)
+
+Finally, you will be able to see the BGP session coming up after a few minutes
+
+![image_of_bgp-status1](/images/bgp-status1.PNG)
+
+![image_of_bgp-status2](/images/bgp-status2.PNG)
