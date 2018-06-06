@@ -29,5 +29,9 @@ Followed by the gateway subnet (I decided to use /24 to keep the same subnetting
 
 Next, we will create the Virtual Network Gateway. We will chose to create a new public IP address. Also, we will use BGP to exchange routes between Azure and the pfSense firewall, so we need to mark the BGP option when creating the Gateway. We will use a private BGP ASN of 65515
 
-![image_of_gwsubnet](/images/vpn-gw.PNG)
+![image_of_vpn-gw](/images/vpn-gw.PNG)
 
+You will find the BGP peer address on your VPN Gateway. This is the local address that BGP will use in your Azure VPN Gateway to initiate a BGP connection to your home gateway
+
+![image_of_bgppeer](/images/bgp-peer.PNG)
+Now we are going to create the Local Network Gateway. Azure refers to the VPN device that sits in your home network
