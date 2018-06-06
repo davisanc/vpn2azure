@@ -48,7 +48,7 @@ Once the local gateway is created we will define a connection to our home VPN Ga
 Now, moving to the other end we will use the Web UI on the pfSense firewall to work on the Rules and VPN settings
 To configure a new tunnel, a new Phase 1 IPSEC VPN must be created. Remote Gateway will be the public IP address assigned to my Virtual Network Gateway in Azure. Leave 'auto' as IKE key exchange version, selecting WAN as the interface to run the VPN. For the authentication part, use the Pre-Shared Key you have defined. Use the encryption algorithm you need, in my case AES (256 bits), DH group and Hashing algorithm
 
-![image_of_phase1](/images/phase1.PNG)
+![image_of_phase1](/images/phase1.png)
 
 We will then move to Phase 2. This phase is what builds the actual tunnel, sets the protocol to use, and sets the length of time to keep the tunnel up when there is no traffic. For remote network, use the VNET address space. Local subnet will the address space on the LAN side of the pFsense
 
