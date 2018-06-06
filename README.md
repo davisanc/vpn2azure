@@ -1,4 +1,4 @@
-## pfSense VPN to Azure with BGP to allow dynamic discovery of your networks
+## Site-to-Site VPN between pfSense and Azure with BGP to allow dynamic discovery of your networks
 
 This post explains how to set up a VPN connection from an open-source pfSense Firewall to Azure. We will use BGP running on top of the VPN IPSEC tunnel to enable our local network and Azure to dynamically exchange routes. This removes the burden of having to declare manually on your VPN gateways which subnets you want to advertise to the other end
 
