@@ -18,9 +18,13 @@ First thing to bear in mind is that you cannot have overlapping IP address betwe
 | Azure VPN Connection Name  | VPN-conn2pfSense  |
 | Azure VPN Shared Key  | mySuperSecretKey123 |
 
-We will start creating a Virtual Network (again make sure the address space you enter doesn't overlap with the space on your local network), followed by the gateway subnet (I decided to use /24 to keep the same subnetting scheme but the recommendation from Microsoft is to use a /27 or /28 for the gateway subnet).
+We will start creating a Virtual Network (again make sure the address space you enter doesn't overlap with the space on your local network)
 
 ![image of vnet](/images/vnet-azure.PNG)
+
+Followed by the gateway subnet (I decided to use /24 to keep the same subnetting scheme but the recommendation from Microsoft is to use a /27 or /28 for the gateway subnet)
+
+![image_of_gwsubnet](/images/gw-subnet.PNG)
 
 Next, we will create the Virtual Network Gateway
 
