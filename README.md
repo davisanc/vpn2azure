@@ -40,3 +40,7 @@ You will find the BGP peer address on your VPN Gateway. This is the local addres
 Now we are going to create the Local Network Gateway. Azure refers to the VPN device that sits in your home network. You will need to indicate the BGP peer address, your local network behind the Firewall (or local VPN gateway) and a Private BGP ASN (I am using 65501)
 
 ![image_of_local-gw](/images/local-gw.PNG)
+
+Once the local gateway is created we will define a connection to our home VPN Gateway. We will use a private shared key to enable the IPSEC VPN to come up. Remember to mark BGP to 'enabled' on your Connection. This is how it looks like when the connection is up and running (assuming at this poit have done the similar on the other end)
+
+![image_of_connection](/images/connection.PNG)
