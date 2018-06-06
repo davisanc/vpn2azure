@@ -13,6 +13,7 @@ First thing to bear in mind is that you cannot have overlapping IP address betwe
 | Azure VNET Gateway Subnet   | 10.11.3.0/24  |
 | Azure VPN Gateway Public IP  |   |
 | Azure VPN Type  | Route-Based |
+| Azure VPN BGP ASN  | 65515 |
 | Azure Gateway Type  | VPN |
 | Azure Local Network Gateway Name  | LocalVPN-pfSense  |
 | Azure VPN Connection Name  | VPN-conn2pfSense  |
@@ -26,5 +27,7 @@ Followed by the gateway subnet (I decided to use /24 to keep the same subnetting
 
 ![image_of_gwsubnet](/images/gw-subnet.PNG)
 
-Next, we will create the Virtual Network Gateway
+Next, we will create the Virtual Network Gateway. We will chose to create a new public IP address. Also, we will use BGP to exchange routes between Azure and the pfSense firewall, so we need to mark the BGP option when creating the Gateway. We will use a private BGP ASN of 65515
+
+![image_of_gwsubnet](/images/vpn-gw.PNG)
 
