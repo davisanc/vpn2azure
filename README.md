@@ -7,7 +7,7 @@ First thing to bear in mind is that you cannot have overlapping IP address betwe
 | Parameters to fill  | Values |
 | --- | --- | 
 | My Home Router Public IP  | 1.2.3.4 |
-| LAN subnet behind pfSense  | 192.168.0.0/24 |
+| LAN subnet behind pfSense (Local VPN Gateway) | 192.168.1.0/24 |
 | Azure VNET Address Space  | 10.11.0.0/16  |
 | Azure VNET VM Subnet  | 10.11.0.0/24  |
 | Azure VNET Gateway Subnet   | 10.11.3.0/24  |
@@ -16,6 +16,8 @@ First thing to bear in mind is that you cannot have overlapping IP address betwe
 | Azure VPN BGP ASN  | 65515 |
 | Azure Gateway Type  | VPN |
 | Azure Local Network Gateway Name  | LocalVPN-pfSense  |
+| Azure Local Network Gateway BGP peer address  | 192.168.1.1  |
+| Azure Local Network Gateway BGP ASN| 65501 |
 | Azure VPN Connection Name  | VPN-conn2pfSense  |
 | Azure VPN Shared Key  | mySuperSecretKey123 |
 
@@ -34,4 +36,7 @@ Next, we will create the Virtual Network Gateway. We will chose to create a new 
 You will find the BGP peer address on your VPN Gateway. This is the local address that BGP will use in your Azure VPN Gateway to initiate a BGP connection to your home gateway
 
 ![image_of_bgppeer](/images/bgp-peer.PNG)
-Now we are going to create the Local Network Gateway. Azure refers to the VPN device that sits in your home network
+
+Now we are going to create the Local Network Gateway. Azure refers to the VPN device that sits in your home network. You will need to indicate the BGP peer address, your local network behind the Firewall (or local VPN gateway) and a Private BGP ASN (I am using 65501)
+
+![image_of_local-gw](/images/local-gw.PNG)
