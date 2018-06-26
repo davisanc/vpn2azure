@@ -93,3 +93,6 @@ To test this, you can simply ping from a computer on the LAN side of the pfSense
 
 ![image_of_ping](/images/ping.png)
 
+And from the Azure side to a host behind pfSense
+
+![image_of_ping](/images/pingfromazuretopfnse.png)
